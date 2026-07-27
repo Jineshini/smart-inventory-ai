@@ -1,0 +1,15 @@
+# Virtual Environment
+venv/
+
+# Environment variables / API keys
+.env
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# Vector database files
+.chroma/
+
+# Streamlit cache
+.streamlit/
