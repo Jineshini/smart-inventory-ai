@@ -13,3 +13,8 @@ __pycache__/
 
 # Streamlit cache
 .streamlit/
+
+chroma_db/
+venv/
+__pycache__/
+*.pyc
