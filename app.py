@@ -2,17 +2,34 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Smart Inventory AI Assistant",
-    page_icon="📦"
+    page_icon="📦",
+    layout="wide"
 )
 
 st.title("📦 Smart Inventory AI Assistant")
 
-st.write("Agentic AI Inventory Assistant is running!")
+st.markdown(
+    """
+    Welcome to Smart Inventory AI Assistant.
+    
+    This system helps users find inventory-related information using Agentic AI and RAG.
+    """
+)
 
-question = st.text_input("Ask your inventory question:")
+question = st.text_input(
+    "Enter your inventory question:"
+)
 
-if st.button("Submit"):
+if st.button("Ask Assistant"):
+
     if question:
-        st.success(f"Your question: {question}")
+        st.info("Processing your question...")
+        
+        st.success(
+            f"Your question: {question}"
+        )
+
     else:
-        st.warning("Please enter a question.")
+        st.warning(
+            "Please enter a question."
+        )
