@@ -32,20 +32,24 @@ Develop an Agentic AI-based inventory assistant using Retrieval-Augmented Genera
 
 # System Architecture
 
-(Add architecture diagram here)
-
-Example:
-
 User
-↓
+   │
+   ▼
 Planner Agent
-↓
-Retrieval Agent (RAG)
-↓
-Inventory Expert Agent
-↓
+   │
+   ▼
+Retrieval Agent
+   │
+   ▼
+ChromaDB
+   │
+   ▼
+Inventory Expert Agent (Groq)
+   │
+   ▼
 Reflection Agent
-↓
+   │
+   ▼
 Final Response
 
 ---
@@ -75,31 +79,54 @@ Review and improve generated responses before presenting them.
 
 # Agent Communication
 
+User Query
+      │
+      ▼
 Planner Agent
-
-↓
-
+      │
+      ▼
 Retrieval Agent
-
-↓
-
+      │
+Retrieved Context
+      │
+      ▼
 Inventory Expert Agent
-
-↓
-
+      │
+Generated Answer
+      │
+      ▼
 Reflection Agent
-
+      │
+Reviewed Answer
+      │
+      ▼
+User
 ---
 
 # Model Selection Strategy
 
-| Task | Model | Reason |
-|------|-------|--------|
-| Planning | Rule-based Planner Agent | Efficient task analysis and workflow coordination |
-| Embeddings | Hugging Face Embedding Model | Converts documents into semantic vectors |
-| Final Answer Generation | Groq LLM | Fast and accurate AI response generation |
+| Sub-task          | Model              | Cost | Latency   | Reason                 |
+| ----------------- | ------------------ | ---- | --------- | ---------------------- |
+| Planning          | Rule-based Planner | Free | Very Fast | Intent analysis        |
+| Embeddings        | all-MiniLM-L6-v2   | Free | Fast      | Semantic search        |
+| Answer Generation | Groq (Llama 3)     | Low  | Very Fast | High-quality reasoning |
+
 
 ---
+
+# Retrieval Evaluation
+
+The retrieval system was tested using five inventory-related queries.
+
+| Query | Retrieval Result |
+|--------|------------------|
+| What is inventory management? | Relevant |
+| Explain EOQ | Relevant |
+| What is FIFO? | Relevant |
+| Explain Safety Stock | Relevant |
+| What is ABC Analysis? | Relevant |
+
+The retrieved document chunks were relevant to the user queries and enabled the LLM to generate accurate responses.
 
 # Retrieval-Augmented Generation (RAG)
 
@@ -184,28 +211,62 @@ smart-inventory-ai/
 ├── knowledge/
 │   └── InventoryManagement.pdf
 │
-├── chroma_db/
+├── chroma_db/ (generated automatically)
 │
 ├── requirements.txt
 ├── README.md
 └── .gitignore
 ---
 
+
 # Installation
 
-1. Clone Repository
+### 1. Clone the repository
 
-2. Create Virtual Environment
+```bash
+git clone https://github.com/Jineshini/smart-inventory-ai.git
+cd smart-inventory-ai
+```
 
-3. Install Dependencies
+### 2. Create a virtual environment
 
-4. Configure API Keys
+```bash
+python -m venv venv
+```
 
-5. Run Streamlit
+### 3. Activate the virtual environment
+
+Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+### 4. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 5. Configure API Key
+
+Create a `.env` file:
+
+```text
+GROQ_API_KEY=your_api_key
+```
+
+### 6. Run the application
+
+```bash
+streamlit run app.py
+```
 
 ---
 
 # Testing
+
+Example Queries
 
 Example Queries
 
@@ -214,7 +275,7 @@ Example Queries
 - What is FIFO?
 - Explain ABC Analysis.
 - What is Reorder Point?
-What is inventory management?
+- What is inventory management?
 
 Generated Response:
 
