@@ -95,8 +95,9 @@ Reflection Agent
 
 | Task | Model | Reason |
 |------|-------|--------|
-| Planning | (Update after implementation) | Fast intent classification |
-| Final Answer | (Update after implementation) | Better reasoning |
+| Planning | Rule-based Planner Agent | Efficient task analysis and workflow coordination |
+| Embeddings | Hugging Face Embedding Model | Converts documents into semantic vectors |
+| Final Answer Generation | Groq LLM | Fast and accurate AI response generation |
 
 ---
 
@@ -104,17 +105,14 @@ Reflection Agent
 
 ## Knowledge Base
 
-The system uses 20+ inventory-related documents.
+The system uses inventory-related PDF documents as the knowledge source.
 
-Examples:
+Current knowledge base:
 
-- Inventory Manual
-- Warehouse SOP
-- EOQ Guide
-- Safety Stock Guide
-- ABC Analysis Guide
-- Purchasing Policy
-
+- Inventory Management Document
+- Inventory planning concepts
+- Stock control information
+- Inventory optimization guidelines
 ---
 
 ## RAG Workflow
@@ -151,12 +149,14 @@ AI Response
 
 | Component | Technology |
 |------------|------------|
-| Python | Backend |
-| Streamlit | UI |
-| LangGraph/CrewAI | Agent Framework |
-| Groq/OpenRouter | LLM |
-| ChromaDB/FAISS | Vector Database |
-| GitHub | Version Control |
+| Programming Language | Python |
+| User Interface | Streamlit |
+| Agent Framework | LangGraph |
+| LLM Provider | Groq LLM |
+| RAG Framework | LangChain |
+| Embedding Model | Hugging Face Embeddings |
+| Vector Database | ChromaDB |
+| Version Control | GitHub |
 
 ---
 
@@ -164,24 +164,31 @@ AI Response
 
 smart-inventory-ai/
 
-app.py
-
-agents/
-
-rag/
-
-knowledge/
-
-utils/
-
-README.md
-
-requirements.txt
-
-.gitignore
-
-.env
-
+│
+├── app.py
+├── workflow.py
+│
+├── agents/
+│   ├── planner_agent.py
+│   ├── retrieval_agent.py
+│   ├── inventory_expert_agent.py
+│   └── reflection_agent.py
+│
+├── graph/
+│   └── workflow_graph.py
+│
+├── rag/
+│   ├── embeddings.py
+│   └── test_embeddings.py
+│
+├── knowledge/
+│   └── InventoryManagement.pdf
+│
+├── chroma_db/
+│
+├── requirements.txt
+├── README.md
+└── .gitignore
 ---
 
 # Installation
@@ -207,7 +214,13 @@ Example Queries
 - What is FIFO?
 - Explain ABC Analysis.
 - What is Reorder Point?
+What is inventory management?
 
+Generated Response:
+
+Inventory management is a specialized branch of business management that involves strategic planning and control of inventories.
+
+The response is reviewed by the Reflection Agent before displaying to the user.
 ---
 
 # Deployment
@@ -239,9 +252,9 @@ Live URL:
 
 # Author
 
-Name:
+Name:Jineshini
 
-Student ID:
+Student ID:ITBIN-2211-0199
 
 Module:
 
