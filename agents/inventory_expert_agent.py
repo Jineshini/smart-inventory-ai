@@ -1,23 +1,44 @@
+import os
+from dotenv import load_dotenv
+from langchain_groq import ChatGroq
+
+from pathlib import Path
+
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+print(os.getenv("GROQ_API_KEY"))
+
+
 class InventoryExpertAgent:
+
+    def __init__(self):
+
+        self.llm = ChatGroq(
+            model="llama-3.3-70b-versatile",
+            temperature=0.2,
+            api_key=os.getenv("GROQ_API_KEY")
+        )
 
     def generate_answer(self, query, context):
 
-        answer = f"""
+        prompt = f"""
+You are an Inventory Management Expert.
+
+Answer the user's question using ONLY the information provided in the context.
+
+Context:
+{context}
+
 Question:
 {query}
 
-Answer:
-
-Based on the retrieved inventory documents,
-
-{context[:1000]}
-
-This answer is generated using the inventory knowledge base.
+Provide a clear, accurate and well-structured answer.
 """
+
+        response = self.llm.invoke(prompt)
 
         return {
             "query": query,
-            "answer": answer,
+            "answer": response.content,
             "next_agent": "reflection_agent"
         }
 

@@ -149,6 +149,16 @@ workflow.add_edge(
 
 app = workflow.compile()
 
+def run_langgraph(user_query):
+
+    result = app.invoke(
+        {
+            "query": user_query
+        }
+    )
+
+    return result["final_answer"]
+
 
 
 if __name__ == "__main__":
