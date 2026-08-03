@@ -229,7 +229,7 @@ Streamlit Community Cloud
 
 Live URL:
 
-(To be added after deployment)
+https://smart-inventory-ai-niqv5edtbvhz7bpzqv97vw.streamlit.app/
 
 ---
 
